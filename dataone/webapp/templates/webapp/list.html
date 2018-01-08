@@ -1,0 +1,38 @@
+{%extends 'webapp/index.html'%}
+{%block content%}
+
+<div class="container">
+  <h2>Movie List</h2>
+  <div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Genre</th>
+        <th>Release Date</th>
+        <th> Director </th>
+        <th> Actors </th>
+      </tr>
+    </thead>
+    <tbody>
+{% for movies in movie %}
+
+      <tr>
+        <td>{{movies.name}}</td>
+        <td>{{movies.genre}}</td>
+        <td>{{movies.release_date}}</td>
+        <td>{{movies.director}}</td>
+        <td>
+        {%for actor in movies.actors.all%}
+        {{actor}}
+        {% endfor%}
+      </td>
+      <td> <a class="btn btn-default" href="{%url 'delete' movies.pk%}"><span class="glyphicon glyphicon-trash"></span></a> </td>
+      <td><a class="btn btn-default" href="{% url 'edit' movies.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+
+      </tr>
+{% endfor%}
+    </tbody>
+  </table>
+
+{%endblock content %}
